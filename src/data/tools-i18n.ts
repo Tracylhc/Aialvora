@@ -1,0 +1,237 @@
+import { Tool } from '../types';
+
+const toolTranslations: Record<string, {
+  description: string;
+  category: string;
+  tags: string[];
+  features: string[];
+  useCases: string[];
+  pros: string;
+  cons: string;
+  priceInfo: string;
+  pricing: string;
+}> = {
+  chatgpt: {
+    description: 'A large language model developed by OpenAI, capable of intelligent conversation, content creation, code generation and more.',
+    category: 'AI Chat',
+    tags: ['AI Chat', 'Content Creation', 'Code Generation'],
+    features: ['AI Chat', 'Content Creation', 'Data Analysis', 'Code Generation'],
+    useCases: ['Writing', 'Office Assistant', 'Study Help'],
+    pros: 'Powerful features, multi-language support, comprehensive ecosystem',
+    cons: 'Response speed can be slow at times, some features require payment',
+    priceInfo: 'Free: Basic features; Plus: GPT-4 advanced model',
+    pricing: 'Free/Paid'
+  },
+  claude: {
+    description: 'An AI assistant developed by Anthropic, known for safety and long context understanding.',
+    category: 'AI Chat',
+    tags: ['Long Context', 'Safe', 'Document Understanding'],
+    features: ['Long Document Processing', 'Safe Conversation', 'Multimodal Support'],
+    useCases: ['Document Analysis', 'Academic Research', 'Creative Writing'],
+    pros: 'Excellent long context handling, high security',
+    cons: 'Relatively limited features, ecosystem not as rich as ChatGPT',
+    priceInfo: 'Free: 100K token context; Claude 3: Larger models',
+    pricing: 'Free/Paid'
+  },
+  gemini: {
+    description: 'Google\'s multimodal AI model supporting text, image, audio, and video understanding.',
+    category: 'AI Chat',
+    tags: ['Multimodal', 'Google Ecosystem', 'Visual Understanding'],
+    features: ['Multimodal Understanding', 'Real-time Info', 'Code Execution'],
+    useCases: ['Image Analysis', 'Video Understanding', 'Programming Assistance'],
+    pros: 'Strong multimodal capabilities, integrates Google services',
+    cons: 'Response speed can be unstable',
+    priceInfo: 'Free: Basic features; Gemini Advanced: Advanced model',
+    pricing: 'Free/Paid'
+  },
+  midjourney: {
+    description: 'Leading AI image generation tool, famous for high-quality artistic styles.',
+    category: 'AI Art',
+    tags: ['Art Generation', 'High Quality', 'Diverse Styles'],
+    features: ['Text to Image', 'Image Variations', 'Stylized Art'],
+    useCases: ['Art Creation', 'Design', 'Concept Art'],
+    pros: 'High-quality outputs, vast style library',
+    cons: 'Requires Discord, paid subscription',
+    priceInfo: 'Basic: $10/month; Pro: $30/month; Enterprise: Custom',
+    pricing: 'Paid'
+  },
+  flux: {
+    description: 'AI image generation model with high quality outputs.',
+    category: 'AI Art',
+    tags: ['Image Generation', 'High Quality', 'AI'],
+    features: ['Text to Image', 'High Resolution', 'Fast Generation'],
+    useCases: ['Art', 'Design', 'Content Creation'],
+    pros: 'Excellent image quality, fast generation',
+    cons: 'Limited availability',
+    priceInfo: 'API access available',
+    pricing: 'Paid'
+  },
+  stablediffusion: {
+    description: 'Open-source AI image generation model.',
+    category: 'AI Art',
+    tags: ['Open Source', 'Image Generation', 'Customizable'],
+    features: ['Text to Image', 'Image to Image', 'ControlNet'],
+    useCases: ['Art Creation', 'Research', 'Custom Models'],
+    pros: 'Open source, highly customizable',
+    cons: 'Requires setup and resources',
+    priceInfo: 'Free; Commercial licenses available',
+    pricing: 'Free'
+  },
+  runway: {
+    description: 'AI video editing and generation platform.',
+    category: 'AI Video',
+    tags: ['Video Editing', 'AI', 'Content Creation'],
+    features: ['Text to Video', 'Video Editing', 'Generative Fill'],
+    useCases: ['Video Production', 'Content Creation', 'Marketing'],
+    pros: 'Professional tools, innovative features',
+    cons: 'Expensive subscription',
+    priceInfo: 'Pro: $12/month; Pro+: $20/month; Enterprise: Custom',
+    pricing: 'Paid'
+  },
+  pika: {
+    description: 'AI video generation tool for creative content.',
+    category: 'AI Video',
+    tags: ['Video Generation', 'AI', 'Creative'],
+    features: ['Text to Video', 'Image to Video', 'Style Transfer'],
+    useCases: ['Social Media', 'Content Creation', 'Animation'],
+    pros: 'Easy to use, creative outputs',
+    cons: 'Limited free usage',
+    priceInfo: 'Free: Limited; Pro: $10/month',
+    pricing: 'Free/Paid'
+  },
+  cursor: {
+    description: 'AI-powered code editor.',
+    category: 'AI Coding',
+    tags: ['Code Editor', 'AI', 'Coding'],
+    features: ['AI Chat', 'Code Generation', 'Refactoring'],
+    useCases: ['Programming', 'Development', 'Learning'],
+    pros: 'Built-in AI, fast and lightweight',
+    cons: 'Relatively new',
+    priceInfo: 'Free',
+    pricing: 'Free'
+  },
+  'github-copilot': {
+    description: 'GitHub Copilot AI pair programmer.',
+    category: 'AI Coding',
+    tags: ['Coding', 'AI', 'GitHub'],
+    features: ['Code Completion', 'Code Generation', 'Refactoring'],
+    useCases: ['Programming', 'Development', 'Learning'],
+    pros: 'Excellent code suggestions, integrates with IDE',
+    cons: 'Occasional incorrect suggestions',
+    priceInfo: 'Free for students; $10/month for individuals; $19/user/month for teams',
+    pricing: 'Paid'
+  },
+  canva: {
+    description: 'Graphic design platform with AI features.',
+    category: 'AI Art',
+    tags: ['Design', 'AI', 'Templates'],
+    features: ['AI Design', 'Templates', 'Collaboration'],
+    useCases: ['Design', 'Social Media', 'Marketing'],
+    pros: 'Easy to use, vast template library',
+    cons: 'Advanced features require Pro',
+    priceInfo: 'Free: Basic; Pro: $12.99/month; Teams: $14.99/month',
+    pricing: 'Free/Paid'
+  },
+  'notion-ai': {
+    description: 'AI features integrated with Notion workspace.',
+    category: 'AI Office',
+    tags: ['Notion', 'AI', 'Productivity'],
+    features: ['AI Writing', 'Summarization', 'Database AI'],
+    useCases: ['Note Taking', 'Productivity', 'Writing'],
+    pros: 'Integrates with Notion',
+    cons: 'Requires Notion subscription',
+    priceInfo: 'Included with Notion Plus/Enterprise',
+    pricing: 'Paid'
+  },
+  deepseek: {
+    description: 'AI chatbot with strong reasoning capabilities.',
+    category: 'AI Chat',
+    tags: ['AI Chat', 'Reasoning', 'Code'],
+    features: ['AI Chat', 'Code Generation', 'Math Reasoning'],
+    useCases: ['Programming', 'Problem Solving', 'Learning'],
+    pros: 'Strong reasoning, good at coding',
+    cons: 'Limited features',
+    priceInfo: 'Free: Basic; API: Pay-as-you-go',
+    pricing: 'Free/Paid'
+  },
+  windsurf: {
+    description: 'AI-powered search and research tool.',
+    category: 'AI Chat',
+    tags: ['Search', 'Research', 'AI'],
+    features: ['AI Search', 'Research', 'Summary'],
+    useCases: ['Research', 'Learning', 'Information'],
+    pros: 'Good search results',
+    cons: 'Limited features',
+    priceInfo: 'Free',
+    pricing: 'Free'
+  },
+  elevenlabs: {
+    description: 'AI voice generation with natural sounding voices.',
+    category: 'AI Audio',
+    tags: ['Voice Generation', 'AI', 'Natural'],
+    features: ['Text to Speech', 'Voice Cloning', 'Multilingual'],
+    useCases: ['Voiceovers', 'Podcasts', 'Accessibility'],
+    pros: 'Most natural voices, good cloning',
+    cons: 'Expensive for heavy usage',
+    priceInfo: 'Starter: $5/month; Creator: $22/month; Enterprise: Custom',
+    pricing: 'Paid'
+  },
+  'copy-ai': {
+    description: 'AI-powered copywriting tool.',
+    category: 'AI Writing',
+    tags: ['Copywriting', 'AI', 'Marketing'],
+    features: ['Content Generation', 'Templates', 'AI Chat'],
+    useCases: ['Marketing', 'Content Creation', 'Social Media'],
+    pros: 'Great for marketing copy',
+    cons: 'Can be repetitive',
+    priceInfo: 'Free: Limited; Pro: $36/month; Enterprise: Custom',
+    pricing: 'Free/Paid'
+  },
+  agentgpt: {
+    description: 'AI Agent that can accomplish tasks autonomously.',
+    category: 'AI Agent',
+    tags: ['AI Agent', 'Autonomous', 'Task'],
+    features: ['Task Planning', 'Execution', 'Feedback'],
+    useCases: ['Productivity', 'Research', 'Automation'],
+    pros: 'Autonomous task completion',
+    cons: 'Can make mistakes',
+    priceInfo: 'Free: Limited; Pro: $20/month',
+    pricing: 'Free/Paid'
+  },
+  langchain: {
+    description: 'Framework for building AI applications.',
+    category: 'AI Agent',
+    tags: ['Framework', 'AI', 'Development'],
+    features: ['Chaining', 'Agents', 'Integrations'],
+    useCases: ['Development', 'AI Apps', 'Research'],
+    pros: 'Powerful framework, good ecosystem',
+    cons: 'Steep learning curve',
+    priceInfo: 'Free',
+    pricing: 'Free'
+  }
+};
+
+export function getToolTranslation(toolId: string, lang: string) {
+  if (lang === 'en' && toolTranslations[toolId]) {
+    return toolTranslations[toolId];
+  }
+  return null;
+}
+
+export function getLocalizedTool(tool: Tool, lang: string): Tool {
+  if (lang !== 'en') return tool;
+  const translation = toolTranslations[tool.id];
+  if (!translation) return tool;
+  return {
+    ...tool,
+    description: translation.description,
+    category: translation.category || tool.category,
+    tags: translation.tags,
+    features: translation.features,
+    useCases: translation.useCases,
+    pros: translation.pros,
+    cons: translation.cons,
+    priceInfo: translation.priceInfo,
+    pricing: translation.pricing || tool.pricing
+  };
+}
