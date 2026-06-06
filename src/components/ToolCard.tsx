@@ -1,9 +1,10 @@
 
-import { Star, ArrowRight } from 'lucide-react';
+import { Star, ArrowRight, Heart } from 'lucide-react';
 import { Tool } from '../types';
 import ToolLogo from './ToolLogo';
 import { useLanguage } from '../i18n/LanguageContext';
 import { getLocalizedTool } from '../data/tools-i18n';
+import { useFavorites } from '../context/FavoritesContext';
 
 interface ToolCardProps {
   tool: Tool;
@@ -12,13 +13,31 @@ interface ToolCardProps {
 
 export default function ToolCard({ tool, showRating = true }: ToolCardProps) {
   const { currentLang, t } = useLanguage();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const localizedTool = getLocalizedTool(tool, currentLang);
+  const favorite = isFavorite(tool.id);
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    toggleFavorite(tool.id);
+  };
 
   return (
     <a
       href={`/tool/${tool.id}`}
-      className="block bg-white rounded-xl border border-gray-200 p-4 hover:shadow-lg hover:shadow-gray-200/50 hover:border-orange-300 transition-all group"
+      className="block bg-white rounded-xl border border-gray-200 p-4 hover:shadow-lg hover:shadow-gray-200/50 hover:border-orange-300 transition-all group relative"
     >
+      <button
+        onClick={handleFavoriteClick}
+        className={`absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full transition-all ${
+          favorite
+            ? 'bg-red-100 text-red-500 hover:bg-red-200'
+            : 'bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-red-400'
+        }`}
+      >
+        <Heart className={`w-4 h-4 ${favorite ? 'fill-current' : ''}`} />
+      </button>
       <div className="flex items-start gap-3">
         <ToolLogo logo={tool.logo} name={tool.name} size="xl" />
         <div className="flex-1 min-w-0">

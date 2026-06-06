@@ -1,6 +1,6 @@
 
 import { useParams } from 'react-router-dom';
-import { ExternalLink, Star, Check, X, Tag, DollarSign, Calendar, Users, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { ExternalLink, Star, Check, X, Tag, DollarSign, Calendar, Users, ThumbsUp, ThumbsDown, Heart } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ToolCard from '../components/ToolCard';
@@ -8,6 +8,7 @@ import ToolLogo from '../components/ToolLogo';
 import { getToolById, getSimilarTools } from '../data/tools';
 import { useLanguage } from '../i18n/LanguageContext';
 import { getLocalizedTool } from '../data/tools-i18n';
+import { useFavorites } from '../context/FavoritesContext';
 
 export default function ToolDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -36,6 +37,8 @@ export default function ToolDetailPage() {
 
   const localizedTool = getLocalizedTool(tool, currentLang);
   const similarTools = getSimilarTools(tool);
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const favorite = isFavorite(tool.id);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -79,8 +82,16 @@ export default function ToolDetailPage() {
                   {currentLang === 'en' ? 'Visit Website' : '访问官网'}
                   <ExternalLink className="w-5 h-5" />
                 </a>
-                <button className="px-6 py-3 bg-white/20 text-white rounded-xl font-semibold hover:bg-white/30 transition-all">
-                  {currentLang === 'en' ? 'Favorite' : '收藏工具'}
+                <button
+                  onClick={() => toggleFavorite(tool.id)}
+                  className={`flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                    favorite
+                      ? 'bg-red-500 text-white hover:bg-red-600'
+                      : 'bg-white/20 text-white hover:bg-white/30'
+                  }`}
+                >
+                  <Heart className={`w-5 h-5 ${favorite ? 'fill-current' : ''}`} />
+                  {currentLang === 'en' ? (favorite ? 'Favorited' : 'Favorite') : (favorite ? '已收藏' : '收藏工具')}
                 </button>
               </div>
             </div>
