@@ -1,12 +1,14 @@
 
 import { useState } from 'react';
-import { Menu, X, Sparkles, Globe } from 'lucide-react';
+import { Menu, X, Sparkles, Globe, Heart } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useFavorites } from '../context/FavoritesContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const { t, currentLang, setLanguage, languageNames } = useLanguage();
+  const { favorites } = useFavorites();
 
   const navItems = [
     { name: t('home'), path: '/' },
@@ -37,6 +39,18 @@ export default function Header() {
                 {item.name}
               </a>
             ))}
+            <a
+              href="/favorites"
+              className="flex items-center gap-1.5 text-gray-600 hover:text-orange-600 transition-colors font-medium text-sm dark:text-gray-300 dark:hover:text-orange-500"
+            >
+              <Heart className="w-4 h-4" />
+              {t('favorites')}
+              {favorites.length > 0 && (
+                <span className="px-1.5 py-0.5 bg-red-100 text-red-600 text-xs rounded-full">
+                  {favorites.length}
+                </span>
+              )}
+            </a>
             <div className="relative">
               <button
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
@@ -95,6 +109,19 @@ export default function Header() {
                   {item.name}
                 </a>
               ))}
+              <a
+                href="/favorites"
+                className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors dark:text-gray-300 dark:hover:bg-gray-700"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Heart className="w-4 h-4" />
+                {t('favorites')}
+                {favorites.length > 0 && (
+                  <span className="ml-auto px-2 py-0.5 bg-red-100 text-red-600 text-xs rounded-full">
+                    {favorites.length}
+                  </span>
+                )}
+              </a>
               <div className="px-2 mt-2">
                 <button
                   onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}

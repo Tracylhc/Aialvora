@@ -26,7 +26,7 @@ export default function ToolCard({ tool, showRating = true }: ToolCardProps) {
   return (
     <a
       href={`/tool/${tool.id}`}
-      className="block bg-white rounded-xl border border-gray-200 p-4 hover:shadow-lg hover:shadow-gray-200/50 hover:border-orange-300 transition-all group relative"
+      className="block bg-white rounded-xl border border-gray-200 p-4 hover:shadow-lg hover:shadow-gray-200/50 hover:border-orange-300 transition-all group relative h-[205px] flex flex-col"
     >
       <button
         onClick={handleFavoriteClick}
@@ -74,7 +74,7 @@ export default function ToolCard({ tool, showRating = true }: ToolCardProps) {
           </div>
         </div>
       </div>
-      <div className="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between">
+      <div className="mt-auto pt-3 border-t border-gray-100 flex items-center justify-between">
         <span className="text-xs text-gray-400">{t('popularity')}: {tool.popularity.toLocaleString()}</span>
         <span className="flex items-center gap-1 text-sm text-gray-500 group-hover:text-orange-600 transition-colors font-medium">
           {t('viewDetails')}

@@ -11,6 +11,10 @@ import WorkflowsPage from "@/pages/WorkflowsPage";
 import NewsPage from "@/pages/NewsPage";
 import SubmitPage from "@/pages/SubmitPage";
 import PrivacyPage from "@/pages/PrivacyPage";
+import TermsPage from "@/pages/TermsPage";
+import AboutPage from "@/pages/AboutPage";
+import ContactPage from "@/pages/ContactPage";
+import FavoritesPage from "@/pages/FavoritesPage";
 
 export default function App() {
   return (
@@ -27,6 +31,10 @@ export default function App() {
         <Route path="/news" element={<NewsPage />} />
         <Route path="/submit" element={<SubmitPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
     </Router>
   );

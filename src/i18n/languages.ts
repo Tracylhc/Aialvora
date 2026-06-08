@@ -61,9 +61,10 @@ export const languages = {
       faq: '常见问题',
       aboutUs: '关于我们',
       contactUs: '联系我们',
-      partners: '合作伙伴',
       privacyPolicy: '隐私政策',
-      copyright: '© 2024 AI导航. All rights reserved.',
+      termsOfService: '服务条款',
+      favorites: '收藏',
+      copyright: '© 2025 AI导航. All rights reserved.',
       viewDetails: '查看详情',
     }
   },
@@ -126,9 +127,10 @@ export const languages = {
       faq: 'FAQ',
       aboutUs: 'About Us',
       contactUs: 'Contact Us',
-      partners: 'Partners',
       privacyPolicy: 'Privacy Policy',
-      copyright: '© 2024 AI Navigator. All rights reserved.',
+      termsOfService: 'Terms of Service',
+      favorites: 'Favorites',
+      copyright: '© 2025 AI Navigator. All rights reserved.',
     }
   }
 };

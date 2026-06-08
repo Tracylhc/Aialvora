@@ -27,10 +27,10 @@ export default function Footer() {
     {
       title: t('about'),
       links: [
-        { name: t('aboutUs'), href: '#' },
-        { name: t('contactUs'), href: '#' },
-        { name: t('partners'), href: '#' },
+        { name: t('aboutUs'), href: '/about' },
+        { name: t('contactUs'), href: '/contact' },
         { name: t('privacyPolicy'), href: '/privacy' },
+        { name: t('termsOfService'), href: '/terms' },
       ]
     },
   ];
