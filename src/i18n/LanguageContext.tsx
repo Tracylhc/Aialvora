@@ -10,11 +10,24 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+function getDefaultLanguage(): LanguageKey {
+  const saved = localStorage.getItem('language');
+  if (saved) {
+    return saved as LanguageKey;
+  }
+
+  const languages = navigator.languages || [navigator.language];
+  for (const lang of languages) {
+    if (lang.startsWith('zh')) {
+      return 'zh';
+    }
+  }
+
+  return 'en';
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [currentLang, setCurrentLang] = useState<LanguageKey>(() => {
-    const saved = localStorage.getItem('language');
-    return (saved as LanguageKey) || 'zh';
-  });
+  const [currentLang, setCurrentLang] = useState<LanguageKey>(getDefaultLanguage);
 
   useEffect(() => {
     localStorage.setItem('language', currentLang);
