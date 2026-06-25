@@ -835,6 +835,26 @@ export const tools: Tool[] = [
     rating: 4.2,
     popularity: 1200,
     addedDate: '2024-03-01'
+  },
+  {
+    id: 'sonus',
+    name: 'Sonus',
+    logo: '/logos/sonus.png',
+    logoColor: generateLogoColor('Sonus', 1),
+    description: 'AI音乐创作工具，支持智能写歌、作曲和音乐制作。',
+    category: 'AI音乐与音频',
+    tags: ['AI音乐', '作曲', '音乐制作', '写歌'],
+    pricing: '免费/付费',
+    website: 'https://sonus.ai',
+    screenshot: '',
+    features: ['AI作曲', '歌词生成', '编曲制作', '多风格'],
+    useCases: ['音乐创作', '歌曲制作', '配乐生成', '灵感激发'],
+    pros: '操作简单，音乐质量高',
+    cons: '免费额度有限',
+    priceInfo: '免费版：有限创作；Pro版：无限创作',
+    rating: 4.6,
+    popularity: 3200,
+    addedDate: '2024-06-01'
   }
 ];
 

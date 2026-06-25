@@ -461,6 +461,17 @@ const toolTranslations: Record<string, {
     cons: 'Relatively new',
     priceInfo: 'Free',
     pricing: 'Free'
+  },
+  sonus: {
+    description: 'AI music creation tool with intelligent songwriting, composition and music production.',
+    category: 'AI Audio',
+    tags: ['AI Music', 'Composition', 'Music Production', 'Songwriting'],
+    features: ['AI Composition', 'Lyrics Generation', 'Arrangement', 'Multiple Styles'],
+    useCases: ['Music Creation', 'Song Production', 'Soundtrack', 'Inspiration'],
+    pros: 'Easy to use, high quality music',
+    cons: 'Limited free usage',
+    priceInfo: 'Free: Limited; Pro: Unlimited',
+    pricing: 'Free/Paid'
   }
 };
 
